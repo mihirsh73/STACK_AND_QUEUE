@@ -79,7 +79,7 @@ public:
         {
             node* resnode = mp[key];
            
-            mp.erase(key);
+            mp.erase(key);                          // TC O(1)
             deletenode(resnode);
         }
         if(mp.size()==cap)
