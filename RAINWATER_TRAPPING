@@ -1,0 +1,71 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int leftmax=0,rightmax=0,lo=0,ho=height.size()-1;
+        int area=0;
+        while(lo<=ho)
+        {
+            if(height[lo]<height[ho])
+            {
+                if(leftmax<height[lo])
+                {
+                    leftmax=height[lo];
+                }
+                else{
+                    area += leftmax-height[lo];
+                }
+                lo++;
+            }
+            else{
+                if(rightmax<height[ho])
+                {
+                    rightmax=height[ho];         // TC O(N) SC O(1);
+                }
+                else{
+                 area += rightmax-height[ho];
+                }
+                ho--;
+            }
+        }
+        return area;
+        /*int leftmax[height.size()];
+        int rightmax[height.size()];
+        leftmax[0]=height[0];                           //TC O(N) SC O(N)
+        for(int i=1; i<height.size(); i++)
+        {
+            leftmax[i]=max(height[i],leftmax[i-1]);
+        }
+        rightmax[height.size()-1]=height[height.size()-1];
+        for(int i=height.size()-2; i>=0; i--)
+        {
+            rightmax[i] = max(height[i],rightmax[i+1]);
+        }
+        int area=0;
+        for(int i=0; i<height.size(); i++)
+        {
+             area += min(leftmax[i],rightmax[i])-height[i];
+        }*/
+        return area;
+        /*int area=0;
+        int leftmax;
+        int rightmax;
+        for(int i=1; i<height.size()-1; i++)
+        {
+            leftmax=height[i];
+            for(int j=0; j<i; j++)
+            {                                                  //TC O(N^2) SC O(1)
+                leftmax= max(leftmax,height[j]);
+            }
+            rightmax=height[i];
+            for(int j=i+1; j<height.size(); j++)
+            {
+                rightmax = max(rightmax,height[j]);
+            }
+            area += min(leftmax,rightmax)-height[i];
+        }
+        return area;*/
+        
+        
+        
+    }
+};
