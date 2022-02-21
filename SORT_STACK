@@ -23,3 +23,4 @@ void sortStack(stack<int> &stack)
     insertsorted(stack,num);
     
 }
+// TC O(N^2) SC O(N)
