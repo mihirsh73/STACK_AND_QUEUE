@@ -1,55 +1,53 @@
-class MyQueue {
-public:
-    stack<int> input, output;
-    /** Initialize your data structure here. */
+  
     MyQueue() {
         
     }
-    
-    /** Push element x to the back of queue. */
+    stack<int> s1;
+    stack<int> s2;
     void push(int x) {
-        input.push(x);
+        s1.push(x);                     // push TC O(1)
     }
-    
-    /** Removes the element from in front of queue and returns that element. */
+
+    // Removes the element from in front of queue.
     int pop() {
-        // shift input to output 
-        if (output.empty())
-            while (input.size())                     // using 2 stacks push TC O(1) and pop TC O(1) most of the time
-                output.push(input.top()), input.pop();
-
-        int x = output.top();
-        output.pop(); 
-        return x; 
-    }
-    
-    /** Get the front element. */
-    int peek() {
-        // shift input to output 
-        if (output.empty())
-            while (input.size())
-                output.push(input.top()), input.pop();
-        return output.top(); 
-    }
-    
-    /** Returns whether the queue is empty. */
-    bool empty() {
-        return input.empty() && output.empty();
+      if(s2.empty()==true)
+      {
+          while(s1.empty()==false)
+          {
+              s2.push(s1.top());          // pop TC O(1) AMORTIZED
+              s1.pop();
+          }
+          
+      }
+        int ans = s2.top();
+        s2.pop();
+        return ans;
+        
     }
 
-};
-  stack<int> s;
-    void push(int x) {
-        pushHelper(x);
+    // Get the front element.
+    int peek(void) {
+        if(s2.empty()==true)
+      {
+          while(s1.empty()==false)
+          {
+              s2.push(s1.top());
+              s1.pop();
+          }
+          
+      }
+        int ans = s2.top();
+        return ans;
+        
+        
     }
-    void pushHelper(int x){         using one stack
-        if(s.size()==0){
-            s.push(x);          Tc O(n)
-            return;
+
+    // Return whether the queue is empty.
+    bool empty(void) {
+       if(s1.size()==0 && s2.size()==0)
+        {
+            return true;
         }
-        int data;
-        data = s.top();
-        s.pop();
-        pushHelper(x);
-        s.push(data);
-       
+        return false;
+    }
+};
