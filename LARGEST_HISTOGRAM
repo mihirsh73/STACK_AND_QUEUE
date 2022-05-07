@@ -1,0 +1,75 @@
+int largestRectangleArea(vector<int>& heights) {
+        /*int leftmin[heights.size()];   //leftwall
+        int rightmin[heights.size()]; // rightwall
+        stack<int> st;
+        for(int i=0; i<heights.size(); i++)                         // TC O(3N) SC O(3N)
+        {
+            while(st.empty()==false && heights[st.top()]>=heights[i])
+            {
+                st.pop();
+            }
+            if(st.empty()==true)
+            {
+                leftmin[i]=0;
+            }
+            else{
+                leftmin[i]=st.top()+1;
+            }
+            st.push(i);
+        }
+        while(st.empty()==false)
+        {
+            st.pop();
+        }
+        for(int i=heights.size()-1; i>=0;i--)
+        {
+            while(st.empty()==false && heights[st.top()]>=heights[i])
+            {
+                st.pop();
+            }
+            if(st.empty()==true)
+            {
+                rightmin[i]=heights.size()-1;
+            }
+            else{
+                rightmin[i]=st.top()-1;
+            }
+            st.push(i);
+        }
+        int ans=INT_MIN;
+        for(int i=0; i<heights.size(); i++)
+        {
+            ans = max(ans,(rightmin[i]-leftmin[i]+1)*heights[i]);
+        }
+        return ans;*/
+        int leftmin[heights.size()];
+        stack<int> st;
+        int ans=0;
+        
+        for(int i=0; i<=heights.size(); i++)
+        {
+            int area;
+            while(st.empty()==false &&(i==heights.size() ||  heights[st.top()]>=heights[i]))   // if some smaller height occur than pop 
+            {                                                                                             // TC O(N) SC O(N)
+                int t = heights[st.top()];
+                st.pop();
+                int width;
+                if(st.empty()==true)
+                {                                                                                  // right wall = i;
+                                                                                                   // left wall = second st.top()
+                    width=i;                                                                       // height = st.top()
+                }
+                else{
+                    width= i-st.top()-1;
+                }
+                area = t*width;
+                ans = max(ans,area);
+            }
+            
+                st.push(i);                                          // fill up the stack in linearly increasing with height and push thw index
+            
+        }
+        return ans;
+        
+        
+    }
