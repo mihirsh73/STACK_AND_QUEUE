@@ -33,4 +33,4 @@ int minTimeToRot(vector<vector<int>>& grid, int n, int m)
         return tot == cnt ? days : -1;
         
     } 
-    // TC O(N^2) SC O(N^2)
+    // TC O(N^2)*4 SC O(N^2)
