@@ -79,7 +79,7 @@ public:
         {
             node* resnode = mp[key];
            
-            mp.erase(key);                          // TC O(1)
+            mp.erase(key);                          // TC O(Q) number of queries and SC O(C) CAPACITY 
             deletenode(resnode);
         }
         if(mp.size()==cap)
