@@ -1,0 +1,48 @@
+https://leetcode.com/problems/validate-stack-sequences/description/
+class Solution {
+public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        stack<int> st;
+        // queue<int> qt;
+       
+        // for(int i=0; i<popped.size();i++)
+        // {
+        //     qt.push(popped[i]); 
+        // }
+        //  int i=0;
+        // while(i<pushed.size())
+        // {
+        //     if(st.empty()==false && st.top()==qt.front())               // TC O(3N) SC O(2N)
+        //     {
+        //        st.pop();
+        //        qt.pop();
+        //     }
+        //     else{
+        //         st.push(pushed[i]);
+        //         i++; 
+        //     }
+        // }   
+        // while(st.empty()==false)
+        // {
+        //     if(st.top()!=qt.front())
+        //     {
+        //         return false;
+        //     }
+        //     st.pop();
+        //     qt.pop();
+        // }
+        // return true;
+        int j=0;
+        for(int i=0; i<pushed.size(); i++)
+        {
+            st.push(pushed[i]);
+            while(st.empty()==false && j<popped.size() && st.top()==popped[j])   // TC O(N) SC O(N)
+            {
+                j++;
+                st.pop();
+            }
+        }
+        if(j==pushed.size()) return true;
+        return false;
+    }
+};
